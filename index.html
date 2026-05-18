@@ -3,144 +3,140 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>活動相片展示</title>
-
+  <title>尚計劃活動相片集</title>
+  <script src="./config.js"></script>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, "Microsoft JhengHei", sans-serif;
-      background: #f5f7fb;
-      color: #1f2937;
-    }
-
-    header {
-      padding: 32px 20px;
-      text-align: center;
-      background: #eef2ff;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 30px;
-    }
-
-    .subtitle {
-      margin-top: 8px;
-      color: #6b7280;
-    }
-
-    #status {
-      text-align: center;
-      padding: 20px;
-      font-size: 16px;
-      color: #6b7280;
-    }
-
-    .gallery {
-      max-width: 1100px;
-      margin: 20px auto;
-      padding: 0 16px 40px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    }
-
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      display: block;
-      background: #e5e7eb;
-    }
-
-    .card-body {
-      padding: 12px;
-    }
-
-    .name {
-      font-weight: bold;
-      font-size: 14px;
-      word-break: break-all;
-    }
-
-    .date {
-      margin-top: 6px;
-      font-size: 12px;
-      color: #6b7280;
-    }
+    :root{--blue:#1557d6;--deep:#0f3f9c;--teal:#18b7a6;--bg:#f5f9ff;--text:#172033;--muted:#667085;--line:#e3eaf5;--card:#fff;--shadow:0 14px 34px rgba(15,35,80,.12);--soft:0 8px 22px rgba(15,35,80,.08);--radius:22px}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--text)}a{text-decoration:none;color:inherit}.topbar{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.topbar-inner{max-width:1220px;margin:auto;padding:14px 22px;display:flex;align-items:center;gap:22px}.brand{display:flex;align-items:center;gap:12px;min-width:310px}.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,var(--blue),var(--teal));display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:var(--soft)}.brand-zh{font-weight:900;font-size:16px;line-height:1.2}.brand-en{font-size:12px;color:var(--muted);margin-top:2px}.nav{display:flex;gap:22px;justify-content:center;flex:1;font-size:14px;font-weight:800;color:#344054}.nav a.active{color:var(--blue)}.tools{display:flex;gap:10px}.search{height:42px;width:260px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:0 14px;display:flex;align-items:center;gap:8px;box-shadow:0 4px 12px rgba(0,0,0,.04)}.search input{border:0;outline:0;width:100%;font-size:14px}.btn{height:42px;border:0;border-radius:14px;padding:0 16px;font-weight:900;cursor:pointer}.btn-primary{background:linear-gradient(135deg,var(--blue),#2563eb);color:#fff;box-shadow:0 10px 20px rgba(21,87,214,.25)}.btn-light{background:#fff;color:var(--blue);border:1px solid #c8d8ff}.hero{background:radial-gradient(circle at 82% 22%,rgba(24,183,166,.13),transparent 30%),linear-gradient(180deg,#ecf6ff,#fff);border-bottom:1px solid var(--line)}.hero-inner{max-width:1220px;margin:auto;padding:42px 22px 32px;display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}.eyebrow{display:inline-flex;padding:8px 13px;background:#fff;border:1px solid var(--line);border-radius:999px;color:var(--deep);font-weight:900;font-size:13px;box-shadow:var(--soft)}h1{margin:16px 0 12px;color:var(--deep);font-size:clamp(34px,5vw,54px);letter-spacing:.06em;line-height:1.08}.subtitle{font-size:17px;color:var(--muted);line-height:1.7;max-width:720px;margin:0 0 20px}.chips{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 16px;font-weight:900;color:#344054;cursor:pointer;box-shadow:0 5px 14px rgba(0,0,0,.05)}.chip.active{background:var(--blue);color:#fff;border-color:var(--blue)}.stats{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--soft);max-width:620px;overflow:hidden}.stat{padding:20px 22px;display:flex;align-items:center;gap:12px}.stat+.stat{border-left:1px solid var(--line)}.stat-icon{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:#e8f2ff;font-size:22px}.stat:nth-child(2) .stat-icon{background:#e4fbf7}.stat:nth-child(3) .stat-icon{background:#fff2df}.stat-label{font-size:13px;color:var(--muted);font-weight:800}.stat-value{font-size:24px;font-weight:950;margin-top:3px}.feature{min-height:280px;border-radius:28px;overflow:hidden;position:relative;background:linear-gradient(135deg,var(--blue),#0f172a);border:4px solid rgba(255,255,255,.9);box-shadow:var(--shadow)}.feature img{width:100%;height:100%;min-height:280px;object-fit:cover;display:block;opacity:.9}.feature:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,23,42,.7),transparent 75%),linear-gradient(0deg,rgba(15,23,42,.58),transparent 55%)}.feature-content{position:absolute;z-index:2;inset:0;padding:26px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end}.badge{position:absolute;top:22px;left:22px;background:rgba(21,87,214,.95);border-radius:999px;padding:8px 13px;font-size:13px;font-weight:950}.feature-title{font-size:30px;font-weight:950}.feature-meta{font-size:14px;opacity:.92;margin-top:8px}.feature-pill{margin-top:10px;align-self:flex-start;border:1px solid rgba(255,255,255,.45);background:rgba(15,23,42,.38);border-radius:999px;padding:6px 11px;font-weight:900;font-size:13px}main{max-width:1220px;margin:auto;padding:34px 22px 54px}.section-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;margin-bottom:16px}.section-title{font-size:26px;color:var(--deep);font-weight:950;letter-spacing:.04em}.section-sub{color:var(--muted);font-size:14px;margin-top:5px}.controls{display:flex;gap:10px}select{height:42px;border:1px solid #cbd8ea;background:#fff;border-radius:13px;padding:0 12px;font-weight:800;color:#344054}.status{color:var(--muted);font-weight:800;min-height:28px;margin:12px 0 20px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--soft);transition:.18s}.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.cover{height:195px;background:#e6f0ff;position:relative;overflow:hidden}.cover img{width:100%;height:100%;object-fit:cover;display:block;transition:.3s}.card:hover img{transform:scale(1.04)}.tag{position:absolute;right:12px;bottom:12px;background:rgba(239,246,255,.94);color:var(--blue);border-radius:999px;padding:6px 10px;font-size:12px;font-weight:950}.card-body{padding:16px}.card-title{font-size:18px;font-weight:950;line-height:1.35}.card-desc{margin-top:8px;color:var(--muted);font-size:13px;line-height:1.55;min-height:40px}.card-meta{margin-top:12px;display:flex;justify-content:space-between;gap:10px;color:#64748b;font-size:13px;font-weight:850}.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.photo .cover{height:172px}.back{display:inline-flex;margin-bottom:18px}.empty,.error{grid-column:1/-1;background:#fff;border:1px dashed #cbd5e1;border-radius:var(--radius);padding:42px 24px;text-align:center;color:var(--muted);box-shadow:var(--soft)}.error{color:#b42318;background:#fff7f7;border-color:#ffcaca}.skeleton{height:280px;border-radius:var(--radius);background:linear-gradient(90deg,#e8eef7,#fff,#e8eef7);background-size:200% 100%;animation:shimmer 1.1s infinite}@keyframes shimmer{from{background-position:200% 0}to{background-position:-200% 0}}footer{background:#fff;border-top:1px solid var(--line)}.footer-inner{max-width:1220px;margin:auto;padding:24px 22px;display:flex;justify-content:space-between;gap:18px;color:var(--muted);font-size:13px}.footer-brand{font-weight:900;color:#344054}@media(max-width:1020px){.nav{display:none}.hero-inner{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.photo-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:720px){.topbar-inner{flex-wrap:wrap;padding:14px 16px}.brand{min-width:100%}.tools{width:100%}.search{flex:1;width:auto}.hero-inner{padding:30px 16px 24px}.stats{grid-template-columns:1fr}.stat+.stat{border-left:0;border-top:1px solid var(--line)}main{padding:28px 16px 44px}.section-head{flex-direction:column;align-items:flex-start}.grid,.photo-grid{grid-template-columns:1fr}.cover,.photo .cover{height:220px}.footer-inner{flex-direction:column}}
   </style>
 </head>
-
 <body>
-  <header>
-    <h1>活動相片展示</h1>
-    <div class="subtitle">自動讀取 Google Drive 最新相片</div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/">
+        <div class="logo">普</div>
+        <div><div class="brand-zh" id="schoolZh"></div><div class="brand-en" id="schoolEn"></div></div>
+      </a>
+      <nav class="nav"><a href="/">首頁</a><a class="active" href="/">相簿瀏覽</a><a href="#gallery">活動相片</a><a href="#">關於尚計劃</a></nav>
+      <div class="tools"><label class="search">🔍<input id="search" type="search" placeholder="搜尋相簿或相片..." /></label><button class="btn btn-primary" id="latestBtn">📷 最新</button></div>
+    </div>
   </header>
 
-  <div id="status">正在載入相片...</div>
-  <main id="gallery" class="gallery"></main>
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow" id="eyebrow">✨ 尚計劃｜活動紀錄</div>
+        <h1 id="siteTitle"></h1>
+        <p class="subtitle" id="siteSubtitle"></p>
+        <div class="chips" id="chips"></div>
+        <div class="stats">
+          <div class="stat"><div class="stat-icon">📘</div><div><div class="stat-label">活動相簿</div><div class="stat-value" id="albumCount">0</div></div></div>
+          <div class="stat"><div class="stat-icon">🖼️</div><div><div class="stat-label">相片總數</div><div class="stat-value" id="photoCount">0</div></div></div>
+          <div class="stat"><div class="stat-icon">🕘</div><div><div class="stat-label">最近更新</div><div class="stat-value" id="latestUpdate">--</div></div></div>
+        </div>
+      </div>
+      <article class="feature" id="featureCard"></article>
+    </div>
+  </section>
+
+  <main>
+    <a class="btn btn-light back" id="backBtn" href="/" style="display:none">← 返回所有相簿</a>
+    <div class="section-head">
+      <div><div class="section-title" id="sectionTitle">最新活動相簿</div><div class="section-sub" id="sectionSub">以 Google Sheet 管理活動資料，每個相簿連接一個 Drive Folder。</div></div>
+      <div class="controls"><select id="sort"><option value="sortOrder">排序：自訂</option><option value="newest">排序：最新</option><option value="oldest">排序：最舊</option></select></div>
+    </div>
+    <div class="status" id="status">正在載入...</div>
+    <section id="gallery" class="grid"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></section>
+  </main>
+
+  <footer><div class="footer-inner"><div><div class="footer-brand" id="footerSchool"></div><div id="footerText"></div></div><div>私隱政策 ｜ 使用條款 ｜ 聯絡我們</div></div></footer>
 
   <script>
-    async function loadPhotos() {
-      const status = document.getElementById("status");
-      const gallery = document.getElementById("gallery");
+    const CONFIG = window.GALLERY_CONFIG || {};
+    const fallbackImage = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='760'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='1'><stop offset='0' stop-color='#1557d6'/><stop offset='1' stop-color='#18b7a6'/></linearGradient></defs><rect width='1200' height='760' fill='url(#g)'/><circle cx='930' cy='170' r='120' fill='rgba(255,255,255,.17)'/><text x='80' y='360' fill='white' font-size='72' font-family='Arial' font-weight='800'>尚計劃活動相簿</text><text x='85' y='430' fill='rgba(255,255,255,.86)' font-size='34' font-family='Arial'>Shine Plan Photo Albums</text></svg>`);
+    let albums = []; let photos = []; let activeCategory = "全部相簿"; let mode = "albums"; let currentAlbum = null;
 
-      try {
-        const response = await fetch("/api/photos");
-        const data = await response.json();
+    init();
 
-        console.log("API result:", data);
-
-        if (!data.ok) {
-          throw new Error(data.error || "API 回傳錯誤");
-        }
-
-        status.textContent = "共 " + data.count + " 張相片";
-
-        if (!data.photos || data.photos.length === 0) {
-          gallery.innerHTML = "<p style='text-align:center;'>暫時未有相片</p>";
-          return;
-        }
-
-        gallery.innerHTML = data.photos.map(function(photo) {
-          const date = new Date(photo.updatedAt).toLocaleDateString("zh-HK");
-
-          return `
-            <article class="card">
-              <a href="${photo.viewUrl}" target="_blank">
-                <img src="${photo.thumbnailUrl}" alt="${photo.name}" loading="lazy">
-              </a>
-              <div class="card-body">
-                <div class="name">${escapeHtml(photo.name)}</div>
-                <div class="date">更新日期：${date}</div>
-              </div>
-            </article>
-          `;
-        }).join("");
-
-      } catch (error) {
-        console.error(error);
-        status.textContent = "相片載入失敗：" + error.message;
-      }
+    function init(){
+      text("schoolZh", CONFIG.schoolNameZh || "香海正覺蓮社佛教普光學校");
+      text("schoolEn", CONFIG.schoolNameEn || "HHCLKA Buddhist Po Kwong School");
+      text("siteTitle", CONFIG.siteTitle || "尚計劃活動相片集");
+      text("siteSubtitle", CONFIG.siteSubtitle || "記錄學生參與尚銀行、網尚店、工作體驗及校園服務的學習歷程。");
+      text("footerSchool", (CONFIG.schoolNameZh || "香海正覺蓮社佛教普光學校") + "｜" + (CONFIG.schoolNameEn || "HHCLKA Buddhist Po Kwong School"));
+      text("footerText", CONFIG.footerText || "HHCLKA Buddhist Po Kwong School");
+      renderChips();
+      document.getElementById("search").addEventListener("input", render);
+      document.getElementById("sort").addEventListener("change", render);
+      document.getElementById("latestBtn").addEventListener("click",()=>document.getElementById("gallery").scrollIntoView({behavior:"smooth"}));
+      const albumId = new URLSearchParams(location.search).get("album");
+      if(albumId) loadAlbum(albumId); else loadAlbums();
     }
 
-    function escapeHtml(text) {
-      return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    function renderChips(){
+      const cats = CONFIG.categories || ["全部相簿","尚銀行","網尚店","工作體驗","校園服務","其他"];
+      document.getElementById("chips").innerHTML = cats.map((c,i)=>`<button class="chip ${i===0?'active':''}" data-cat="${escAttr(c)}">${esc(c)}</button>`).join("");
+      document.getElementById("chips").onclick = e => { const b=e.target.closest(".chip"); if(!b) return; activeCategory=b.dataset.cat; document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active")); b.classList.add("active"); render(); };
     }
 
-    loadPhotos();
+    async function loadAlbums(){
+      mode="albums"; document.getElementById("backBtn").style.display="none"; text("sectionTitle","最新活動相簿"); text("sectionSub","每個活動相簿連接一個 Google Drive Folder，方便日後持續新增活動。");
+      try{
+        const data = await getJson("/api?action=albums");
+        if(!data.ok) throw new Error(data.error || "API 回傳錯誤");
+        albums = Array.isArray(data.albums) ? data.albums : [];
+        text("albumCount", albums.length); text("photoCount", albums.reduce((s,a)=>s+Number(a.photoCount||0),0));
+        const latest = [...albums].sort((a,b)=>new Date(b.latestUpdated||0)-new Date(a.latestUpdated||0))[0]; text("latestUpdate", latest ? smartDate(latest.latestUpdated) : "--");
+        renderFeature(albums.find(a=>String(a.featured).toUpperCase()==="TRUE") || albums[0]);
+        render();
+      }catch(err){ showError(err.message + "。請確認 Apps Script 已更新為多相簿版本，並已設定 ALBUM_SHEET_ID。") }
+    }
+
+    async function loadAlbum(albumId){
+      mode="photos"; document.getElementById("backBtn").style.display="inline-flex";
+      try{
+        const data = await getJson("/api?action=photos&albumId=" + encodeURIComponent(albumId));
+        if(!data.ok) throw new Error(data.error || "API 回傳錯誤");
+        currentAlbum = data.album || {title:"活動相簿",category:"其他"}; photos = Array.isArray(data.photos) ? data.photos : [];
+        text("sectionTitle", currentAlbum.title || "活動相簿"); text("sectionSub", (currentAlbum.dateText || "") + "　" + (currentAlbum.description || ""));
+        text("albumCount", 1); text("photoCount", photos.length); text("latestUpdate", photos[0] ? smartDate(photos[0].updatedAt) : "--");
+        renderFeature({title:currentAlbum.title, dateText:currentAlbum.dateText, description:currentAlbum.description, category:currentAlbum.category, coverUrl: photos[0]?.thumbnailUrl, photoCount: photos.length});
+        render();
+      }catch(err){ showError(err.message) }
+    }
+
+    async function getJson(url){ const res = await fetch(url); return await res.json(); }
+
+    function render(){ mode === "albums" ? renderAlbums() : renderPhotos(); }
+    function renderAlbums(){
+      const key = document.getElementById("search").value.trim().toLowerCase(); const sort = document.getElementById("sort").value;
+      let list = albums.filter(a => activeCategory === "全部相簿" || a.category === activeCategory);
+      if(key) list = list.filter(a => [a.title,a.category,a.description,a.dateText].join(" ").toLowerCase().includes(key));
+      if(sort==="newest") list.sort((a,b)=>new Date(b.latestUpdated||0)-new Date(a.latestUpdated||0)); else if(sort==="oldest") list.sort((a,b)=>new Date(a.latestUpdated||0)-new Date(b.latestUpdated||0)); else list.sort((a,b)=>Number(a.sortOrder||999)-Number(b.sortOrder||999));
+      text("status", list.length ? `已載入 ${list.length} 個相簿` : "暫時未有相簿");
+      const g=document.getElementById("gallery"); g.className="grid";
+      g.innerHTML = list.length ? list.map(albumCard).join("") : `<div class="empty"><strong>暫時未有相簿</strong><br>請在 Google Sheet 的 Albums 工作頁新增資料，並將 published 設為 TRUE。</div>`;
+    }
+    function renderPhotos(){
+      const key = document.getElementById("search").value.trim().toLowerCase(); const sort = document.getElementById("sort").value;
+      let list = [...photos]; if(key) list = list.filter(p => String(p.name||"").toLowerCase().includes(key));
+      list.sort((a,b)=> sort==="oldest" ? new Date(a.updatedAt||a.createdAt||0)-new Date(b.updatedAt||b.createdAt||0) : new Date(b.updatedAt||b.createdAt||0)-new Date(a.updatedAt||a.createdAt||0));
+      text("status", list.length ? `已載入 ${list.length} 張相片` : "暫時未有相片");
+      const g=document.getElementById("gallery"); g.className="photo-grid";
+      g.innerHTML = list.length ? list.map(photoCard).join("") : `<div class="empty"><strong>暫時未有相片</strong><br>請把 JPG / PNG 相片放入此活動的 Google Drive Folder。</div>`;
+    }
+    function albumCard(a){ return `<article class="card"><a href="/?album=${encodeURIComponent(a.id)}"><div class="cover"><img src="${escAttr(a.coverUrl||fallbackImage)}" alt="${escAttr(a.title)}"><span class="tag">${esc(a.category||"活動")}</span></div><div class="card-body"><div class="card-title">${esc(a.title)}</div><div class="card-desc">${esc(a.description||"活動相片紀錄")}</div><div class="card-meta"><span>${esc(a.dateText||"日期待定")}</span><span>${Number(a.photoCount||0)} 張相片</span></div></div></a></article>` }
+    function photoCard(p){ const tag=currentAlbum?.category||"活動"; return `<article class="card photo"><a href="${escAttr(p.viewUrl||'#')}" target="_blank" rel="noopener"><div class="cover"><img src="${escAttr(p.thumbnailUrl||fallbackImage)}" alt="${escAttr(p.name||'相片')}"><span class="tag">${esc(tag)}</span></div><div class="card-body"><div class="card-title">${esc(currentAlbum?.title||'活動相片')}</div><div class="card-desc">${esc(p.name||'未命名相片')}</div><div class="card-meta"><span>${dateText(p.updatedAt||p.createdAt)}</span><span>開啟原圖</span></div></div></a></article>` }
+    function renderFeature(a){
+      const f=document.getElementById("featureCard");
+      if(!a){ f.innerHTML=`<img src="${fallbackImage}" alt="相簿封面"><div class="feature-content"><div class="badge">精選相簿</div><div class="feature-title">尚計劃活動相片集</div><div class="feature-meta">等待新增活動相簿</div><div class="feature-pill">相片 0 張</div></div>`; return; }
+      f.innerHTML=`<img src="${escAttr(a.coverUrl||fallbackImage)}" alt="${escAttr(a.title)}"><div class="feature-content"><div class="badge">精選相簿</div><div class="feature-title">${esc(a.title||'尚計劃活動相片集')}</div><div class="feature-meta">📅 ${esc(a.dateText||'日期待定')}</div><div class="feature-pill">相片 ${Number(a.photoCount||0)} 張</div></div>`;
+    }
+    function showError(msg){ document.getElementById("gallery").className="grid"; document.getElementById("gallery").innerHTML=`<div class="error"><strong>載入失敗</strong><br>${esc(msg)}</div>`; text("status","請檢查 Google Sheet、Apps Script 及 Netlify 設定。"); renderFeature(null); }
+    function text(id,v){ const el=document.getElementById(id); if(el) el.textContent=v; }
+    function dateText(v){ if(!v) return "日期待定"; const d=new Date(v); return isNaN(d)?"日期待定":d.toLocaleDateString("zh-HK",{year:"numeric",month:"long",day:"numeric"}); }
+    function smartDate(v){ if(!v) return "--"; const d=new Date(v), n=new Date(); if(!isNaN(d)&&d.toDateString()===n.toDateString()) return "今天"; return isNaN(d)?"--":d.toLocaleDateString("zh-HK",{month:"short",day:"numeric"}); }
+    function esc(s){ return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
+    function escAttr(s){ return esc(s).replaceAll("`","&#096;"); }
   </script>
 </body>
 </html>
