@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>活動相片展示</title>
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, "Microsoft JhengHei", sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    header {
+      padding: 32px 20px;
+      text-align: center;
+      background: #eef2ff;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #6b7280;
+    }
+
+    #status {
+      text-align: center;
+      padding: 20px;
+      font-size: 16px;
+      color: #6b7280;
+    }
+
+    .gallery {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 16px 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      background: #e5e7eb;
+    }
+
+    .card-body {
+      padding: 12px;
+    }
+
+    .name {
+      font-weight: bold;
+      font-size: 14px;
+      word-break: break-all;
+    }
+
+    .date {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>活動相片展示</h1>
+    <div class="subtitle">自動讀取 Google Drive 最新相片</div>
+  </header>
+
+  <div id="status">正在載入相片...</div>
+  <main id="gallery" class="gallery"></main>
+
+  <script>
+    async function loadPhotos() {
+      const status = document.getElementById("status");
+      const gallery = document.getElementById("gallery");
+
+      try {
+        const response = await fetch("/api/photos");
+        const data = await response.json();
+
+        console.log("API result:", data);
+
+        if (!data.ok) {
+          throw new Error(data.error || "API 回傳錯誤");
+        }
+
+        status.textContent = "共 " + data.count + " 張相片";
+
+        if (!data.photos || data.photos.length === 0) {
+          gallery.innerHTML = "<p style='text-align:center;'>暫時未有相片</p>";
+          return;
+        }
+
+        gallery.innerHTML = data.photos.map(function(photo) {
+          const date = new Date(photo.updatedAt).toLocaleDateString("zh-HK");
+
+          return `
+            <article class="card">
+              <a href="${photo.viewUrl}" target="_blank">
+                <img src="${photo.thumbnailUrl}" alt="${photo.name}" loading="lazy">
+              </a>
+              <div class="card-body">
+                <div class="name">${escapeHtml(photo.name)}</div>
+                <div class="date">更新日期：${date}</div>
+              </div>
+            </article>
+          `;
+        }).join("");
+
+      } catch (error) {
+        console.error(error);
+        status.textContent = "相片載入失敗：" + error.message;
+      }
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    loadPhotos();
+  </script>
+</body>
+</html>
