@@ -8,6 +8,6 @@ window.GALLERY_CONFIG = {
 
   // GitHub Pages is a static host, so it calls the Apps Script read-only API directly.
   // This URL is public read-only. Do not put API_SECRET here.
-  apiBaseUrl: "https://script.google.com/macros/s/AKfycbyE96B_1B1ITV8pwa3826Mg2nMBPKUeztSaGMHmReIzVdxoTqaVSWWLhCuvKS8ipL_TPQ/exec",
+  apiBaseUrl: "https://script.google.com/macros/s/AKfycbxKbdXinQ3L_Uedxcs1OYjUYqaLrC0eOqHPatdxa04whE5hMzOrjB3inTiWz_qAqxosaw/exec",
   apiMode: "jsonp"
 };
