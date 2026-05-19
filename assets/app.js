@@ -446,11 +446,6 @@
         <a class="album-cover" href="${escapeAttr(href)}" aria-label="查看 ${escapeAttr(album.title)}">
           ${renderCoverImage(album.coverUrl, album.title)}
           <span class="album-label">${escapeHtml(album.category)}</span>
-          <span class="album-cover-info">
-            <span class="album-cover-title">${escapeHtml(album.title)}</span>
-            <span class="album-cover-desc">${escapeHtml(excerpt(album.description || "活動相片已整理成相簿，歡迎瀏覽。", 64))}</span>
-            <span class="album-cover-meta">${escapeHtml(album.dateText)}　${Number(album.photoCount || 0)} 張相片</span>
-          </span>
         </a>
         <div class="album-body">
           <h3 class="album-title">${escapeHtml(album.title)}</h3>
