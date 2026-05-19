@@ -174,7 +174,7 @@
     state.currentAlbum = null;
     state.photos = [];
     showHomeView();
-    setLoadingStatus(els.status, "相簿資料載入中", "正在連接 Google Drive 相片資料，請稍候...");
+    renderInitialLoadingState();
 
     try {
       const data = await getJson("albums");
@@ -228,6 +228,43 @@
     if (els.galleryControls) els.galleryControls.hidden = true;
     if (els.homeView) els.homeView.hidden = true;
     if (els.albumView) els.albumView.hidden = false;
+  }
+
+  function renderInitialLoadingState() {
+    const isFocus = state.activeCategory === FOCUS_CATEGORY;
+    const isReview = state.activeCategory === REVIEW_CATEGORY;
+
+    syncNav();
+
+    if (els.galleryControls) {
+      els.galleryControls.hidden = !isReview;
+    }
+
+    if (els.featureSection) {
+      els.featureSection.hidden = !isFocus;
+    }
+
+    if (els.moreSection) {
+      els.moreSection.hidden = !isReview;
+    }
+
+    const loadingHtml = renderLoadingState(
+      "相簿資料載入中",
+      "正在連接 Google Drive 相片資料，請稍候..."
+    );
+
+    if (isFocus && els.featuredArea) {
+      els.featuredArea.innerHTML = loadingHtml;
+    }
+
+    if (isReview && els.albumGrid) {
+      els.albumGrid.innerHTML = loadingHtml;
+    }
+
+    if (els.metaLine) {
+      els.metaLine.hidden = true;
+      setText(els.metaLine, "");
+    }
   }
 
   function buildApiUrl(action, extra) {
@@ -382,20 +419,14 @@
     }
 
     if (isFocus) {
-      setNormalStatus(els.status, visible.length
-        ? `顯示 ${visible.length} 個焦點活動相簿`
-        : "暫時未有焦點活動相簿");
-
+      // 「顯示 X 個相簿」狀態列已按 Jason 要求移除；焦點活動直接顯示相簿內容。
       if (els.featuredArea) {
         els.featuredArea.innerHTML = renderFocusAlbums(visible);
       }
     }
 
     if (isReview) {
-      setNormalStatus(els.status, visible.length
-        ? `顯示 ${visible.length} 個活動回顧相簿`
-        : "未有符合條件的活動回顧相簿");
-
+      // 「顯示 X 個相簿」狀態列已移除；活動回顧以相簿 grid 及 meta-line 顯示資料。
       if (els.albumGrid) {
         els.albumGrid.innerHTML = visible.length
           ? visible.map(renderAlbumCard).join("")
@@ -561,6 +592,10 @@
     return value.slice(0, 2).toUpperCase();
   }
 
+  function renderLoadingState(title, detail) {
+    return `<div class="loading-state" role="status" aria-live="polite"><strong>${escapeHtml(title)}</strong><p>${escapeHtml(detail)}</p></div>`;
+  }
+
   function renderEmptyState(title, detail) {
     return `<div class="empty-state"><strong>${escapeHtml(title)}</strong><p>${escapeHtml(detail)}</p></div>`;
   }
@@ -570,9 +605,16 @@
   }
 
   function showHomeError(message) {
-    setNormalStatus(els.status, "未能載入相簿資料");
-    if (els.featuredArea) els.featuredArea.innerHTML = "";
-    if (els.albumGrid) els.albumGrid.innerHTML = renderErrorState("載入失敗", message);
+    const errorHtml = renderErrorState("載入失敗", message);
+
+    if (state.activeCategory === FOCUS_CATEGORY && els.featuredArea) {
+      els.featuredArea.innerHTML = errorHtml;
+    }
+
+    if (state.activeCategory === REVIEW_CATEGORY && els.albumGrid) {
+      els.albumGrid.innerHTML = errorHtml;
+    }
+
     updateMetaLine([]);
   }
 
