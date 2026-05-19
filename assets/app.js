@@ -41,6 +41,7 @@
       schoolEn: document.getElementById("schoolEn"),
       siteTitle: document.getElementById("siteTitle"),
       siteSubtitle: document.getElementById("siteSubtitle"),
+      heroVisual: document.getElementById("heroVisual"),
       footerSchool: document.getElementById("footerSchool"),
       footerText: document.getElementById("footerText"),
       filters: document.getElementById("filters"),
@@ -66,8 +67,8 @@
     document.title = CONFIG.siteTitle || "尚計劃活動相片集";
     setText(els.schoolZh, CONFIG.schoolNameZh || "香海正覺蓮社佛教普光學校");
     setText(els.schoolEn, CONFIG.schoolNameEn || "HHCLKA Buddhist Po Kwong School");
-    setText(els.siteTitle, CONFIG.siteTitle || "尚計劃活動相片集");
-    setText(els.siteSubtitle, CONFIG.siteSubtitle || "記錄學生的學習歷程，見證每一次參與、嘗試與成長。");
+    renderSiteTitle(CONFIG.siteTitle || "尚計劃活動相片集");
+    setText(els.siteSubtitle, CONFIG.siteSubtitle || "記錄學生的學習歷程，見證每一次參與、嘗試與進步。");
     setText(els.footerSchool, CONFIG.schoolNameZh || "香海正覺蓮社佛教普光學校");
     setText(els.footerText, CONFIG.footerText || CONFIG.schoolNameEn || "HHCLKA Buddhist Po Kwong School");
   }
@@ -90,6 +91,41 @@
       const activeClass = index === 0 ? " is-active" : "";
       return `<button class="filter-button${activeClass}" type="button" data-category="${escapeAttr(category)}">${escapeHtml(category)}</button>`;
     }).join("");
+  }
+
+  function renderSiteTitle(title) {
+    if (!els.siteTitle) return;
+
+    const value = String(title || "尚計劃活動相片集").trim();
+    const suffix = "相片集";
+    if (value.endsWith(suffix) && value.length > suffix.length) {
+      els.siteTitle.innerHTML = `${escapeHtml(value.slice(0, -suffix.length))}<span>${escapeHtml(suffix)}</span>`;
+      return;
+    }
+
+    setText(els.siteTitle, value);
+  }
+
+  function updateHeroVisual(list) {
+    if (!els.heroVisual) return;
+
+    const albums = Array.isArray(list) ? list : [];
+    const featuredAlbum = albums.find(isFeatured);
+    const picks = []
+      .concat(featuredAlbum ? [featuredAlbum] : [])
+      .concat(albums.filter(function (album) {
+        return album !== featuredAlbum;
+      }));
+    const cards = [
+      { className: "photo-card big", album: picks[0], fallback: "尚" },
+      { className: "photo-card small left", album: picks[1], fallback: "活動" },
+      { className: "photo-card small right", album: picks[2], fallback: "相片" }
+    ];
+
+    els.heroVisual.innerHTML = cards.map(function (card) {
+      const album = card.album || {};
+      return `<div class="${card.className}">${renderCoverImage(album.coverUrl, album.title || card.fallback)}</div>`;
+    }).join("") + '<div class="camera-icon"></div>';
   }
 
   function bindEvents() {
@@ -155,6 +191,7 @@
       state.albums = Array.isArray(data.albums)
         ? data.albums.map(normalizeAlbum).filter(isPublished)
         : [];
+      updateHeroVisual(state.albums);
       renderAlbums();
       updateMetaLine(state.albums);
     } catch (error) {

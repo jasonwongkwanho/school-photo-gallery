@@ -7,7 +7,7 @@
   <title>尚計劃活動相片集</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Yuji+Boku&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Noto+Sans+HK:wght@400;500;700;900&family=Yuji+Boku&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/styles.css" />
   <script src="./config.js"></script>
   <script defer src="./assets/app.js"></script>
@@ -24,8 +24,9 @@
           </span>
         </a>
         <nav class="header-actions" aria-label="主要操作">
-          <button class="ghost-button" type="button" id="focusSearch">搜尋</button>
-          <button class="primary-button" type="button" data-scroll-target="galleryArea">瀏覽相簿</button>
+          <a class="ghost-button nav-home" href="./">首頁</a>
+          <button class="ghost-button nav-overview" type="button" data-scroll-target="galleryArea">活動總覽</button>
+          <button class="primary-button nav-browse" type="button" data-scroll-target="galleryArea">瀏覽相簿</button>
         </nav>
       </div>
     </header>
@@ -35,8 +36,20 @@
         <div class="hero-inner">
           <div class="hero-copy">
             <p class="eyebrow">SHINE's PHOTO GALLERY</p>
-            <h1 id="siteTitle">尚計劃活動相片集</h1>
-            <p id="siteSubtitle">記錄學生的學習歷程，見證每一次參與、嘗試與成長。</p>
+            <h1 id="siteTitle">尚計劃活動<span>相片集</span></h1>
+            <p id="siteSubtitle">記錄學生的學習歷程，見證每一次參與、嘗試與進步。</p>
+          </div>
+          <div class="hero-visual" id="heroVisual" aria-hidden="true">
+            <div class="photo-card big">
+              <span class="cover-art"><span>尚</span></span>
+            </div>
+            <div class="photo-card small left">
+              <span class="cover-art"><span>活動</span></span>
+            </div>
+            <div class="photo-card small right">
+              <span class="cover-art"><span>相片</span></span>
+            </div>
+            <div class="camera-icon"></div>
           </div>
         </div>
       </section>
