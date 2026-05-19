@@ -1110,6 +1110,7 @@ img {
 }
 
 .album-cover {
+  display: block;
   position: relative;
   aspect-ratio: 16 / 10;
   margin: 14px 14px 0;
@@ -1118,6 +1119,7 @@ img {
   background:
     linear-gradient(135deg, rgba(37, 99, 235, 0.18), rgba(217, 70, 239, 0.14), rgba(249, 115, 22, 0.16)),
     #e2e8f0;
+  isolation: isolate;
 }
 
 .album-cover::before {
@@ -1226,6 +1228,11 @@ img {
   z-index: 5;
   display: grid;
   gap: 5px;
+  padding: 10px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 12px;
+  background: rgba(7, 26, 53, 0.52);
+  backdrop-filter: blur(10px);
   color: #fff;
   text-shadow: 0 8px 20px rgba(7, 26, 53, 0.42);
 }
