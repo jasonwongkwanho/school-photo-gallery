@@ -260,7 +260,7 @@ img {
 .hero h1 {
   margin: 0;
   max-width: 760px;
-  font-family: "Noto Serif TC", "Songti TC", Georgia, serif;
+  font-family: "Yuji Boku", "Noto Serif TC", "Songti TC", Georgia, serif;
   font-size: clamp(44px, 7vw, 82px);
   font-weight: 700;
   line-height: 1.06;
