@@ -164,13 +164,6 @@
       });
     }
 
-    document.querySelectorAll("[data-scroll-target]").forEach(function (button) {
-      button.addEventListener("click", function () {
-        const target = document.getElementById(button.dataset.scrollTarget);
-        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    });
-
     const focusSearch = document.getElementById("focusSearch");
     if (focusSearch && els.searchInput) {
       focusSearch.addEventListener("click", function () {
