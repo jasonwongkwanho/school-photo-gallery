@@ -284,7 +284,8 @@ img {
 }
 
 .hero-copy {
-  max-width: 720px;
+  min-width: 0;
+  max-width: 620px;
 }
 
 .eyebrow,
@@ -308,18 +309,24 @@ img {
 
 .hero h1 {
   margin: 0;
-  max-width: none;
+  max-width: 620px;
   font-family: "Yuji Boku", "Noto Serif TC", "Songti TC", Georgia, serif;
-  font-size: clamp(48px, 7vw, 86px);
+  font-size: clamp(46px, 5.8vw, 76px);
   font-weight: 700;
   line-height: 1.06;
   letter-spacing: 0;
-  white-space: nowrap;
-  word-break: keep-all;
-  color: var(--navy);
+  white-space: normal;
+  word-break: normal;
+  color: #8b3ff3;
+  background: linear-gradient(92deg, #6347ea 0%, #7c3aed 34%, #b638d6 62%, #ec4899 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 0 14px 34px rgba(124, 58, 237, 0.18);
+  -webkit-text-fill-color: transparent;
 }
 
 .hero h1 span {
+  display: inline-block;
   margin-left: 0.08em;
   background: linear-gradient(135deg, var(--blue), var(--purple), var(--pink), var(--orange));
   -webkit-background-clip: text;
@@ -364,7 +371,7 @@ img {
   width: min(430px, 74%);
   height: 260px;
   top: 10px;
-  right: 60px;
+  right: 0;
   transform: rotate(-4deg);
 }
 
@@ -375,13 +382,13 @@ img {
 }
 
 .photo-card.small.left {
-  left: 38px;
+  left: 8px;
   bottom: 10px;
   transform: rotate(7deg);
 }
 
 .photo-card.small.right {
-  right: 0;
+  right: -26px;
   bottom: 18px;
   transform: rotate(8deg);
   animation-duration: 10.5s;

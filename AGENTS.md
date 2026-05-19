@@ -2,7 +2,7 @@
 
 ## 專案名稱
 
-尚．回憶（School Photo Gallery）
+尚回憶．尚片集（School Photo Gallery）
 
 ## 專案定位
 
