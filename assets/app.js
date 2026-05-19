@@ -48,6 +48,7 @@
       sortSelect: document.getElementById("sortSelect"),
       metaLine: document.getElementById("metaLine"),
       status: document.getElementById("status"),
+      featureSection: document.querySelector(".feature-section"),
       featuredArea: document.getElementById("featuredArea"),
       albumGrid: document.getElementById("albumGrid"),
       homeHero: document.getElementById("homeHero"),
@@ -327,24 +328,45 @@
     };
   }
 
+  function getAlbumSections(list, activeCategory) {
+    if (activeCategory !== allCategory) {
+      return {
+        featured: [],
+        grid: list.slice(),
+        showFeatured: false
+      };
+    }
+
+    const split = splitAlbums(list);
+    return {
+      featured: split.featured,
+      grid: split.more,
+      showFeatured: true
+    };
+  }
+
   function renderAlbums() {
     const visible = getVisibleAlbums();
-    const split = splitAlbums(visible);
+    const sections = getAlbumSections(visible, state.activeCategory);
 
     setText(els.status, visible.length
       ? `顯示 ${visible.length} 個公開相簿`
       : "未有符合條件的公開相簿");
 
+    if (els.featureSection) {
+      els.featureSection.hidden = !sections.showFeatured;
+    }
+
     if (els.featuredArea) {
-      els.featuredArea.innerHTML = split.featured.length
-        ? renderFeaturedCard(split.featured[0])
-        : renderEmptyState("暫時未有精選相簿", "勾選 Google Sheet 的「精選活動」後，第一個精選相簿會在這裡以大型專題形式顯示。");
+      els.featuredArea.innerHTML = sections.featured.length
+        ? renderFeaturedCard(sections.featured[0])
+        : renderEmptyState("更新中，密切留意", "更多精彩活動相片即將上載。");
     }
 
     if (els.albumGrid) {
-      els.albumGrid.innerHTML = split.more.length
-        ? split.more.map(renderAlbumCard).join("")
-        : renderEmptyState("暫時未有更多活動相簿", "非精選但已公開的相簿會顯示在這裡。");
+      els.albumGrid.innerHTML = sections.grid.length
+        ? sections.grid.map(renderAlbumCard).join("")
+        : renderEmptyState("更新中，密切留意", "更多精彩活動相片即將上載。");
     }
 
     updateMetaLine(visible);
@@ -434,8 +456,26 @@
   }
 
   function renderCoverImage(url, title) {
-    if (!url) return "";
-    return `<img src="${escapeAttr(url)}" alt="${escapeAttr(title || "活動相簿封面")}" loading="lazy" onerror="this.style.opacity='0';" />`;
+    const fallback = renderCoverFallback(title);
+    if (!url) return fallback;
+
+    return `
+      <img src="${escapeAttr(url)}" alt="${escapeAttr(title || "活動相簿封面")}" loading="lazy" onerror="this.remove();" />
+      ${fallback}
+    `;
+  }
+
+  function renderCoverFallback(title) {
+    return `
+      <span class="cover-art" aria-hidden="true">
+        <span>${escapeHtml(getCoverInitials(title))}</span>
+      </span>
+    `;
+  }
+
+  function getCoverInitials(title) {
+    const value = String(title || "相簿").trim();
+    return value.slice(0, 2).toUpperCase();
   }
 
   function renderEmptyState(title, detail) {
@@ -541,7 +581,8 @@
     parseDateValue,
     renderPhotoTile,
     sortAlbums,
-    splitAlbums
+    splitAlbums,
+    getAlbumSections
   };
 
   if (typeof document !== "undefined" && document.addEventListener) {

@@ -171,7 +171,6 @@ img {
 
 .ghost-button,
 .primary-button,
-.hero-button,
 .feature-action,
 .album-action {
   min-height: 42px;
@@ -194,7 +193,6 @@ img {
 }
 
 .primary-button,
-.hero-button,
 .feature-action {
   padding: 0 20px;
   color: #fff;
@@ -204,7 +202,6 @@ img {
 
 .ghost-button:hover,
 .primary-button:hover,
-.hero-button:hover,
 .feature-action:hover,
 .album-action:hover {
   transform: translateY(-2px);
@@ -278,13 +275,6 @@ img {
   color: rgba(255, 255, 255, 0.78);
   font-size: 18px;
   line-height: 1.9;
-}
-
-.hero-button {
-  min-height: 48px;
-  padding: 0 24px;
-  background: linear-gradient(135deg, var(--orange), var(--magenta) 48%, var(--blue));
-  box-shadow: 0 24px 54px rgba(217, 70, 239, 0.22);
 }
 
 .hero-panel {
@@ -425,6 +415,10 @@ img {
   margin-top: 62px;
 }
 
+.feature-section[hidden] + .more-section {
+  margin-top: 0;
+}
+
 .section-head {
   margin-bottom: 24px;
   display: flex;
@@ -491,6 +485,8 @@ img {
 }
 
 .featured-media {
+  position: relative;
+  overflow: hidden;
   min-height: 430px;
   background:
     linear-gradient(135deg, rgba(37, 99, 235, 0.24), rgba(6, 182, 212, 0.28)),
@@ -498,10 +494,13 @@ img {
 }
 
 .featured-media img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   min-height: 430px;
   object-fit: cover;
+  filter: saturate(1.12) contrast(1.04);
   transform: scale(1.01);
   transition: transform 0.5s ease;
 }
@@ -594,10 +593,80 @@ img {
 }
 
 .album-cover img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: saturate(1.1) contrast(1.03);
   transition: transform 0.42s ease;
+}
+
+.album-cover::after,
+.featured-media::after,
+.masthead-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.3;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(6, 182, 212, 0.45), transparent 32%),
+    radial-gradient(circle at 86% 20%, rgba(217, 70, 239, 0.34), transparent 34%),
+    linear-gradient(135deg, rgba(249, 115, 22, 0.22), rgba(37, 99, 235, 0.08) 46%, rgba(212, 160, 23, 0.18));
+  mix-blend-mode: screen;
+}
+
+.cover-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.88);
+  font-family: "Noto Serif TC", "Songti TC", Georgia, serif;
+  font-size: clamp(34px, 6vw, 76px);
+  font-weight: 800;
+  letter-spacing: 0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(6, 182, 212, 0.95), transparent 30%),
+    radial-gradient(circle at 86% 18%, rgba(217, 70, 239, 0.82), transparent 34%),
+    radial-gradient(circle at 78% 86%, rgba(249, 115, 22, 0.85), transparent 36%),
+    linear-gradient(135deg, #071a35 0%, #2563eb 46%, #06b6d4 100%);
+}
+
+.cover-art::before,
+.cover-art::after {
+  content: "";
+  position: absolute;
+  inset: -28%;
+  background:
+    conic-gradient(from 120deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0), rgba(212, 160, 23, 0.34), rgba(255, 255, 255, 0));
+  animation: coverDrift 12s linear infinite;
+}
+
+.cover-art::after {
+  inset: 8%;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 34% 66% 54% 46%;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0)),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12), transparent 58%);
+  animation-direction: reverse;
+}
+
+.cover-art span {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 18px 42px rgba(7, 26, 53, 0.36);
+}
+
+@keyframes coverDrift {
+  to {
+    transform: rotate(1turn);
+  }
 }
 
 .album-card:hover .album-cover img {
@@ -606,6 +675,7 @@ img {
 
 .album-label {
   position: absolute;
+  z-index: 3;
   top: 14px;
   left: 14px;
   backdrop-filter: blur(12px);
@@ -702,13 +772,17 @@ img {
   position: absolute;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
 }
 
 .masthead-cover img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0.44;
+  filter: saturate(1.14) contrast(1.05);
 }
 
 .masthead-content {
@@ -885,8 +959,7 @@ img {
   }
 
   .ghost-button,
-  .primary-button,
-  .hero-button {
+  .primary-button {
     width: 100%;
   }
 
