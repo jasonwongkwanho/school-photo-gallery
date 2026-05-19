@@ -453,6 +453,11 @@
         <a class="album-cover" href="${escapeAttr(href)}" aria-label="查看 ${escapeAttr(album.title)}">
           ${renderCoverImage(album.coverUrl, album.title)}
           <span class="album-label">${escapeHtml(album.category)}</span>
+          <span class="album-cover-info">
+            <span class="album-cover-title">${escapeHtml(album.title)}</span>
+            <span class="album-cover-desc">${escapeHtml(excerpt(album.description || "活動相片已整理成相簿，歡迎瀏覽。", 64))}</span>
+            <span class="album-cover-meta">${escapeHtml(album.dateText)}　${Number(album.photoCount || 0)} 張相片</span>
+          </span>
         </a>
         <div class="album-body">
           <h3 class="album-title">${escapeHtml(album.title)}</h3>
@@ -555,6 +560,20 @@
   function updateMetaLine(list, explicitPhotoCount) {
     const albumsForMeta = Array.isArray(list) ? list : [];
     const albumCount = state.mode === "photos" ? 1 : albumsForMeta.length;
+
+    if (state.mode === "albums" && state.activeCategory === allCategory) {
+      if (els.metaLine) els.metaLine.hidden = true;
+      setText(els.metaLine, "");
+      return;
+    }
+
+    if (els.metaLine) els.metaLine.hidden = false;
+
+    if (state.mode === "albums" && state.activeCategory === "尚回憶") {
+      setText(els.metaLine, `${albumCount} 個相簿`);
+      return;
+    }
+
     const photoCount = Number.isFinite(explicitPhotoCount)
       ? explicitPhotoCount
       : albumsForMeta.reduce(function (sum, album) {
