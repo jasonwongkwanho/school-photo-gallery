@@ -10,6 +10,8 @@
 
 - `index.html`
 - `config.js`
+- `assets/styles.css`
+- `assets/app.js`
 - `README.md`
 - `docs/*`
 

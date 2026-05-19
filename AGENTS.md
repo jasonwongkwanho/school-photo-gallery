@@ -14,7 +14,7 @@
 
 ```text
 GitHub Pages
-  index.html / config.js
+  index.html / config.js / assets/styles.css / assets/app.js
         ↓ JSONP
 Google Apps Script Web App
         ↓
@@ -31,15 +31,17 @@ Google Drive：每個活動相簿對應一個資料夾
 4. 前台只可讀取公開 read-only API。
 5. 所有相片必須來自已審核、適合公開展示的 Google Drive 資料夾。
 6. 網頁設計方向應為專業攝影相簿 / portfolio 風格，而不是後台 dashboard 或一般 Web App 風格。
-7. 一般修改版面、顏色、卡片設計、互動篩選器時，只修改 GitHub 的 `index.html` / `config.js`。
+7. 一般修改版面、顏色、卡片設計、互動篩選器時，只修改 GitHub 的 `index.html` / `config.js` / `assets/styles.css` / `assets/app.js`。
 8. 修改 Google Sheet 欄名、欄位邏輯、讀取 Drive 方法時，才修改 `apps-script/Code.gs`，並提醒 Jason 需要重新部署 Apps Script。
 
 ## 主要檔案
 
 | 檔案 | 用途 |
 |---|---|
-| `index.html` | GitHub Pages 前台頁面、CSS、相簿顯示邏輯、分類篩選、搜尋 |
+| `index.html` | GitHub Pages 前台 HTML 結構及靜態資源載入 |
 | `config.js` | 網站設定、學校名稱、分類、Apps Script API URL |
+| `assets/styles.css` | 前台視覺設計、版面、responsive 樣式 |
+| `assets/app.js` | JSONP 讀取、相簿顯示邏輯、分類篩選、搜尋、排序 |
 | `apps-script/Code.gs` | Apps Script 後台 read-only API 程式碼 |
 | `README.md` | 專案簡介 |
 | `docs/architecture.md` | 系統架構說明 |
@@ -112,9 +114,10 @@ Google Drive：每個活動相簿對應一個資料夾
 1. GitHub Pages 首頁可正常載入。
 2. 分類篩選器可運作。
 3. 搜尋相簿可運作。
-4. 精選活動只顯示 `精選活動 = TRUE`。
-5. 更多活動相簿顯示非精選但 `公開顯示 = TRUE` 的相簿。
-6. 點擊相簿後可進入 `?album=<相簿代號>`。
-7. 相簿詳情頁可顯示相片牆。
-8. 手機版正常。
-9. Apps Script 測試 URL 可回傳 `ok: true`。
+4. 排序器可按最新活動、最舊活動、相片最多運作。
+5. 精選活動只顯示第一個 `精選活動 = TRUE` 相簿作 headline feature。
+6. 更多活動相簿顯示非精選但 `公開顯示 = TRUE` 的相簿。
+7. 點擊相簿後可進入 `?album=<相簿代號>`。
+8. 相簿詳情頁可顯示相片牆，且不顯示每張相片的檔名及日期。
+9. 手機版正常。
+10. Apps Script 測試 URL 可回傳 `ok: true`。

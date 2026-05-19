@@ -8,7 +8,7 @@
 
 ```text
 GitHub Pages
-  index.html / config.js
+  index.html / config.js / assets/styles.css / assets/app.js
         ↓ JSONP
 Google Apps Script Web App
         ↓
@@ -21,8 +21,10 @@ Google Drive：每個活動相簿對應一個資料夾
 
 | 檔案 | 用途 |
 |---|---|
-| `index.html` | 前台頁面、CSS、相簿顯示、分類篩選、搜尋 |
+| `index.html` | 前台 HTML 結構及靜態資源載入 |
 | `config.js` | 學校名稱、分類、Apps Script API URL 等設定 |
+| `assets/styles.css` | 前台視覺設計、版面、responsive 樣式 |
+| `assets/app.js` | JSONP 讀取、相簿顯示、分類篩選、搜尋、排序及相片牆 |
 | `apps-script/Code.gs` | Apps Script 後台 read-only API 參考碼 |
 | `AGENTS.md` | AI / Codex 協作指引 |
 | `docs/architecture.md` | 系統架構說明 |
