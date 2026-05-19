@@ -162,35 +162,6 @@ img {
   text-overflow: ellipsis;
 }
 
-.header-categories {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 9px;
-  flex: 0 0 auto;
-}
-
-.header-category-button {
-  min-height: 44px;
-  padding: 0 18px;
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 999px;
-  color: var(--navy);
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
-  font-weight: 900;
-  transition: transform 0.22s ease, border-color 0.22s ease, color 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
-}
-
-.header-category-button:hover,
-.header-category-button.is-active {
-  transform: translateY(-2px);
-  color: #fff;
-  border-color: transparent;
-  background: linear-gradient(135deg, #1858ef, #05a8ff);
-  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.25);
-}
-
 .feature-action,
 .album-action {
   min-height: 42px;
@@ -382,27 +353,6 @@ img {
   font-size: 21px;
   line-height: 1.9;
   font-weight: 600;
-}
-
-.hero-pill-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
-}
-
-.hero-pill-row span {
-  display: inline-flex;
-  align-items: center;
-  padding: 11px 17px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.76);
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  color: #475569;
-  font-size: 14px;
-  font-weight: 800;
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
-  backdrop-filter: blur(12px);
 }
 
 .shine-hero-art {
@@ -746,10 +696,6 @@ img {
     font-size: 16px;
     line-height: 1.8;
     margin-top: 24px;
-  }
-
-  .hero-pill-row {
-    display: none;
   }
 
   .shine-hero-art {
@@ -1514,17 +1460,6 @@ img {
 }
 
 @media (max-width: 1040px) {
-  .header-inner {
-    flex-wrap: wrap;
-  }
-
-  .header-categories {
-    width: 100%;
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding-bottom: 2px;
-  }
-
   .controls-inner {
     grid-template-columns: 1fr;
   }
@@ -1589,16 +1524,6 @@ img {
 
   .brand {
     width: 100%;
-  }
-
-  .header-categories {
-    gap: 8px;
-  }
-
-  .header-category-button {
-    min-height: 40px;
-    padding: 0 14px;
-    white-space: nowrap;
   }
 
   .brand-title,

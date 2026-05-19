@@ -47,7 +47,6 @@
       schoolEn: document.getElementById("schoolEn"),
       siteTitle: document.getElementById("siteTitle"),
       siteSubtitle: document.getElementById("siteSubtitle"),
-      headerCategories: document.getElementById("headerCategories"),
       footerSchool: document.getElementById("footerSchool"),
       footerText: document.getElementById("footerText"),
       filters: document.getElementById("filters"),
@@ -91,7 +90,6 @@
   }
 
   function renderFilters() {
-    renderCategoryButtons(els.headerCategories, "header-category-button");
     renderCategoryButtons(els.filters, "filter-button");
   }
 
@@ -127,8 +125,7 @@
   }
 
   function bindEvents() {
-    bindCategoryGroup(els.headerCategories, true);
-    bindCategoryGroup(els.filters, false);
+    bindCategoryGroup(els.filters);
 
     if (els.searchInput) {
       els.searchInput.addEventListener("input", function () {
@@ -158,27 +155,22 @@
     }
   }
 
-  function bindCategoryGroup(group, shouldScroll) {
+  function bindCategoryGroup(group) {
     if (!group) return;
 
     group.addEventListener("click", function (event) {
-        const button = event.target.closest(".filter-button");
-        const headerButton = event.target.closest(".header-category-button");
-        const categoryButton = button || headerButton;
-        if (!categoryButton) return;
+      const button = event.target.closest(".filter-button");
+      if (!button) return;
 
-        const nextCategory = categoryButton.dataset.category || allCategory;
-        if (state.mode === "photos") {
-          window.location.href = `./?category=${encodeURIComponent(nextCategory)}`;
-          return;
-        }
+      const nextCategory = button.dataset.category || allCategory;
+      if (state.mode === "photos") {
+        window.location.href = `./?category=${encodeURIComponent(nextCategory)}`;
+        return;
+      }
 
-        state.activeCategory = nextCategory;
-        syncCategoryButtons();
-        renderAlbums();
-        if (shouldScroll && els.galleryControls) {
-          els.galleryControls.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+      state.activeCategory = nextCategory;
+      syncCategoryButtons();
+      renderAlbums();
     });
   }
 
