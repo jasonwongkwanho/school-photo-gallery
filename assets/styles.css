@@ -216,7 +216,8 @@ img {
   inset: 0;
   z-index: -2;
   background:
-    linear-gradient(90deg, #f9e5e7 0%, #f7c6cc 34%, #f19aa8 66%, #e87789 100%);
+    linear-gradient(120deg, rgba(7, 26, 53, 0.94) 0%, rgba(20, 31, 63, 0.88) 46%, rgba(6, 182, 212, 0.4) 100%),
+    conic-gradient(from 145deg at 76% 44%, rgba(249, 115, 22, 0.74), rgba(217, 70, 239, 0.52), rgba(37, 99, 235, 0.78), rgba(6, 182, 212, 0.58), rgba(249, 115, 22, 0.74));
 }
 
 .hero::after {
@@ -225,9 +226,9 @@ img {
   inset: 0;
   z-index: -1;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='420' viewBox='0 0 1200 420'%3E%3Cpath d='M780 -80 C820 40 880 82 984 144 C1084 204 1124 278 1160 430' fill='none' stroke='white' stroke-opacity='.72' stroke-width='1.4'/%3E%3Cpath d='M996 -90 C1032 0 1078 85 1124 166 C1172 250 1202 321 1228 430' fill='none' stroke='white' stroke-opacity='.64' stroke-width='1.3'/%3E%3C/svg%3E"),
-    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.3), transparent 36%),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0));
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1320' height='560' viewBox='0 0 1320 560'%3E%3Cpath d='M815 -70 C845 30 910 82 1018 145 C1126 208 1174 290 1208 565' fill='none' stroke='white' stroke-opacity='.58' stroke-width='1.35'/%3E%3Cpath d='M1004 -92 C1045 4 1090 92 1135 174 C1184 264 1220 354 1247 565' fill='none' stroke='white' stroke-opacity='.5' stroke-width='1.2'/%3E%3Cpath d='M852 418 C954 340 1038 330 1126 374 C1200 411 1254 420 1322 372' fill='none' stroke='white' stroke-opacity='.32' stroke-width='1'/%3E%3Cpath d='M910 80 C1012 146 1090 202 1142 285' fill='none' stroke='white' stroke-opacity='.22' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='1070' cy='238' r='112' fill='none' stroke='white' stroke-opacity='.12' stroke-width='1'/%3E%3Ccircle cx='1178' cy='308' r='156' fill='none' stroke='white' stroke-opacity='.1' stroke-width='1'/%3E%3C/svg%3E"),
+    radial-gradient(circle at 78% 28%, rgba(255, 255, 255, 0.2), transparent 26%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
   background-repeat: no-repeat;
   background-position: center right, center, center;
   background-size: cover;
@@ -239,7 +240,7 @@ img {
   display: flex;
   align-items: center;
   padding: 82px 0 96px;
-  color: var(--navy);
+  color: #fff;
 }
 
 .hero-copy {
@@ -249,7 +250,7 @@ img {
 .eyebrow,
 .section-kicker {
   margin: 0 0 16px;
-  color: rgba(7, 26, 53, 0.58);
+  color: rgba(255, 255, 255, 0.72);
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.18em;
@@ -269,7 +270,7 @@ img {
 .hero-copy p:not(.eyebrow) {
   max-width: 620px;
   margin: 24px 0 34px;
-  color: rgba(7, 26, 53, 0.68);
+  color: rgba(255, 255, 255, 0.78);
   font-size: 18px;
   line-height: 1.9;
 }
